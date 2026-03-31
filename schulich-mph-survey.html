@@ -1,554 +1,567 @@
-<!--
-  Schulich MPH — "Can I get in?" Survey Snippet
-  ─────────────────────────────────────────────
-  Drop this block anywhere inside your CMS page body.
-  All styles are scoped to .mph-survey to avoid conflicts.
-  No external dependencies beyond Google Fonts.
--->
+<!DOCTYPE html>
+<html lang="en">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap"
-  rel="stylesheet">
-<link rel="stylesheet" href="css/westernu-theme.compiled.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schulich MPH Survey</title>
+  <!--
+    Schulich MPH — "Can I get in?" Survey Snippet
+    ─────────────────────────────────────────────
+    This page is a self-contained hosted version of the survey.
+    All styles are scoped to .mph-survey to avoid conflicts.
+    No external dependencies beyond Google Fonts.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/westernu-theme.compiled.css">
+</head>
 
-<style>
-  /* ── Scope ─────────────────────────────────────── */
-  .mph-survey *,
-  .mph-survey *::before,
-  .mph-survey *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+<body>
 
-  .mph-survey {
-    --purple: #4F2683;
-    /* Western brand purple */
-    --purple-l: #F3EEF9;
-    --purple-m: #8F55E0;
-    --ink: #1A1A2E;
-    --muted: #5A5A72;
-    --border: #DDD8E8;
-    --success-bg: #8f55e048;
-    --success: #8F55E0;
-    --warn-bg: #FFF8EC;
-    --warn: #8A5C00;
-    --danger-bg: #FDEEED;
-    --danger: #8B2020;
-    font-family: 'BentonSans Book', sans-serif;
-    color: var(--ink);
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 40px 24px 56px;
-  }
+  <style>
+    /* ── Scope ─────────────────────────────────────── */
+    .mph-survey *,
+    .mph-survey *::before,
+    .mph-survey *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* ── Intro block ────────────────────────────────── */
-  .mph-survey .intro {
-    margin-bottom: 36px;
-  }
+    .mph-survey {
+      --purple: #4F2683;
+      /* Western brand purple */
+      --purple-l: #F3EEF9;
+      --purple-m: #8F55E0;
+      --ink: #1A1A2E;
+      --muted: #5A5A72;
+      --border: #DDD8E8;
+      --success-bg: #8f55e048;
+      --success: #8F55E0;
+      --warn-bg: #FFF8EC;
+      --warn: #8A5C00;
+      --danger-bg: #FDEEED;
+      --danger: #8B2020;
+      font-family: 'BentonSans Book', sans-serif;
+      color: var(--ink);
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
 
-  .mph-survey .intro-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--purple-m);
-    margin-bottom: 10px;
-  }
+    /* ── Intro block ────────────────────────────────── */
+    .mph-survey .intro {
+      margin-bottom: 36px;
+    }
 
-  .mph-survey .intro-heading {
-    font-family: 'BentonSans Bold', serif;
-    font-size: 32px;
-    line-height: 1.2;
-    color: var(--purple);
-    margin-bottom: 12px;
-  }
-
-  .mph-survey .intro-body {
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--muted);
-    max-width: 540px;
-  }
-
-  /* ── Card ───────────────────────────────────────── */
-  .mph-survey .card {
-    background: #fff;
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 32px 28px 28px;
-    box-shadow: 0 2px 16px rgba(79, 45, 127, .06);
-  }
-
-  /* ── Progress ───────────────────────────────────── */
-  .mph-survey .progress-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .mph-survey .progress-track {
-    flex: 1;
-    height: 4px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .mph-survey .progress-fill {
-    height: 100%;
-    background: var(--purple);
-    border-radius: 4px;
-    transition: width .4s ease;
-  }
-
-  .mph-survey .progress-label {
-    font-size: 12px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  /* ── Question ───────────────────────────────────── */
-  .mph-survey .q-section {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--purple-m);
-    margin-bottom: 6px;
-  }
-
-  .mph-survey .q-text {
-    font-family: 'BentonSans Bold', serif;
-    font-size: 20px;
-    line-height: 1.4;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-
-  .mph-survey .q-note {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--muted);
-    background: var(--purple-l);
-    border-left: 3px solid var(--purple-m);
-    padding: 10px 14px;
-    border-radius: 0 6px 6px 0;
-    margin-bottom: 20px;
-  }
-
-  /* ── Options ─────────────────────────────────────── */
-  .mph-survey .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .mph-survey .opt-btn {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 13px 16px;
-    border-radius: 10px;
-    border: 1.5px solid var(--border);
-    background: #FAFAFA;
-    color: var(--ink);
-    cursor: pointer;
-    font-family: 'BentonSans Book', sans-serif;
-    font-size: 14px;
-    text-align: left;
-    transition: border-color .15s, background .15s;
-  }
-
-  .mph-survey .opt-btn:hover {
-    border-color: var(--purple-m);
-    background: var(--purple-l);
-  }
-
-  .mph-survey .opt-btn.selected {
-    border-color: var(--purple);
-    background: var(--purple-l);
-    color: var(--purple);
-  }
-
-  .mph-survey .opt-radio {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1.5px solid currentColor;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 10px;
-    transition: background .15s;
-  }
-
-  .mph-survey .opt-btn.selected .opt-radio {
-    background: var(--purple);
-    border-color: var(--purple);
-    color: #fff;
-  }
-
-  /* ── Nav ─────────────────────────────────────────── */
-  .mph-survey .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .mph-survey .btn {
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-family: 'BentonSans Medium', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: opacity .15s, background .15s;
-  }
-
-  .mph-survey .btn:disabled {
-    opacity: .3;
-    cursor: not-allowed;
-  }
-
-  .mph-survey .btn-primary {
-    background: var(--purple);
-    color: #fff;
-  }
-
-  .mph-survey .btn-primary:not(:disabled):hover {
-    background: var(--purple-m);
-  }
-
-  .mph-survey .btn-ghost {
-    background: transparent;
-    color: var(--muted);
-    border: 1.5px solid var(--border);
-  }
-
-  .mph-survey .btn-ghost:not(:disabled):hover {
-    border-color: var(--muted);
-  }
-
-  /* ── Result ──────────────────────────────────────── */
-  .mph-survey .result-box {
-    border-radius: 10px;
-    padding: 22px 20px;
-    border: 1.5px solid;
-    margin-bottom: 20px;
-  }
-
-  .mph-survey .result-box.pass {
-    background: var(--success-bg);
-    border-color: #8F55E0;
-  }
-
-  .mph-survey .result-box.warn {
-    background: var(--warn-bg);
-    border-color: #F0C97A;
-  }
-
-  .mph-survey .result-box.fail {
-    background: var(--danger-bg);
-    border-color: #F0AAAA;
-  }
-
-  .mph-survey .result-title {
-    font-family: 'BentonSans Bold', serif;
-    font-size: 20px;
-    margin-bottom: 8px;
-  }
-
-  .mph-survey .result-box.pass .result-title {
-    color: var(--success);
-  }
-
-  .mph-survey .result-box.warn .result-title {
-    color: var(--warn);
-  }
-
-  .mph-survey .result-box.fail .result-title {
-    color: var(--danger);
-  }
-
-  .mph-survey .result-body {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--muted);
-  }
-
-  .mph-survey .checklist {
-    list-style: none;
-    margin-top: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .mph-survey .checklist li {
-    display: flex;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--muted);
-    align-items: flex-start;
-  }
-
-  .mph-survey .check-dot {
-    flex-shrink: 0;
-    margin-top: 4px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .mph-survey .result-box.pass .check-dot {
-    background: var(--success);
-  }
-
-  .mph-survey .result-box.warn .check-dot {
-    background: var(--warn);
-  }
-
-  .mph-survey .result-box.fail .check-dot {
-    background: var(--danger);
-  }
-
-  .mph-survey .restart-link {
-    background: none;
-    border: none;
-    font-family: 'BentonSans Book', sans-serif;
-    font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 0;
-  }
-
-  .mph-survey .restart-link:hover {
-    color: var(--purple);
-  }
-
-  @media (max-width: 480px) {
-    .mph-survey .card {
-      padding: 24px 18px 20px;
+    .mph-survey .intro-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--purple-m);
+      margin-bottom: 10px;
     }
 
     .mph-survey .intro-heading {
-      font-size: 26px;
+      font-family: 'BentonSans Bold', serif;
+      font-size: 32px;
+      line-height: 1.2;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+
+    .mph-survey .intro-body {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 540px;
+    }
+
+    /* ── Card ───────────────────────────────────────── */
+    .mph-survey .card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px 28px;
+      box-shadow: 0 2px 16px rgba(79, 45, 127, .06);
+    }
+
+    /* ── Progress ───────────────────────────────────── */
+    .mph-survey .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .mph-survey .progress-track {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .mph-survey .progress-fill {
+      height: 100%;
+      background: var(--purple);
+      border-radius: 4px;
+      transition: width .4s ease;
+    }
+
+    .mph-survey .progress-label {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Question ───────────────────────────────────── */
+    .mph-survey .q-section {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--purple-m);
+      margin-bottom: 6px;
     }
 
     .mph-survey .q-text {
-      font-size: 18px;
+      font-family: 'BentonSans Bold', serif;
+      font-size: 20px;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 10px;
     }
-  }
-</style>
 
-<div class="mph-survey">
+    .mph-survey .q-note {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      background: var(--purple-l);
+      border-left: 3px solid var(--purple-m);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 20px;
+    }
 
-  <!-- ── Intro ── -->
-  <div class="intro">
-    <div class="intro-label">Admissions check</div>
-    <h2 class="intro-heading">Can I get in?</h2>
-    <p class="intro-body">
-      We welcome applicants from all academic backgrounds — answer a few quick questions to find out if you meet the
-      eligibility requirements for Western's Master of Public Health program.
-    </p>
-  </div>
+    /* ── Options ─────────────────────────────────────── */
+    .mph-survey .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
 
-  <!-- ── Survey card ── -->
-  <div class="card">
-    <div class="progress-row">
-      <div class="progress-track">
-        <div class="progress-fill" id="mph-prog" style="width:0%"></div>
-      </div>
-      <div class="progress-label" id="mph-prog-label">1 of 6</div>
+    .mph-survey .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: #FAFAFA;
+      color: var(--ink);
+      cursor: pointer;
+      font-family: 'BentonSans Book', sans-serif;
+      font-size: 14px;
+      text-align: left;
+      transition: border-color .15s, background .15s;
+    }
+
+    .mph-survey .opt-btn:hover {
+      border-color: var(--purple-m);
+      background: var(--purple-l);
+    }
+
+    .mph-survey .opt-btn.selected {
+      border-color: var(--purple);
+      background: var(--purple-l);
+      color: var(--purple);
+    }
+
+    .mph-survey .opt-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      transition: background .15s;
+    }
+
+    .mph-survey .opt-btn.selected .opt-radio {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    .mph-survey .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mph-survey .btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'BentonSans Medium', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: opacity .15s, background .15s;
+    }
+
+    .mph-survey .btn:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+    }
+
+    .mph-survey .btn-primary {
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .mph-survey .btn-primary:not(:disabled):hover {
+      background: var(--purple-m);
+    }
+
+    .mph-survey .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--border);
+    }
+
+    .mph-survey .btn-ghost:not(:disabled):hover {
+      border-color: var(--muted);
+    }
+
+    /* ── Result ──────────────────────────────────────── */
+    .mph-survey .result-box {
+      border-radius: 10px;
+      padding: 22px 20px;
+      border: 1.5px solid;
+      margin-bottom: 20px;
+    }
+
+    .mph-survey .result-box.pass {
+      background: var(--success-bg);
+      border-color: #8F55E0;
+    }
+
+    .mph-survey .result-box.warn {
+      background: var(--warn-bg);
+      border-color: #F0C97A;
+    }
+
+    .mph-survey .result-box.fail {
+      background: var(--danger-bg);
+      border-color: #F0AAAA;
+    }
+
+    .mph-survey .result-title {
+      font-family: 'BentonSans Bold', serif;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .mph-survey .result-box.pass .result-title {
+      color: var(--success);
+    }
+
+    .mph-survey .result-box.warn .result-title {
+      color: var(--warn);
+    }
+
+    .mph-survey .result-box.fail .result-title {
+      color: var(--danger);
+    }
+
+    .mph-survey .result-body {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .mph-survey .checklist {
+      list-style: none;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mph-survey .checklist li {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      align-items: flex-start;
+    }
+
+    .mph-survey .check-dot {
+      flex-shrink: 0;
+      margin-top: 4px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .mph-survey .result-box.pass .check-dot {
+      background: var(--success);
+    }
+
+    .mph-survey .result-box.warn .check-dot {
+      background: var(--warn);
+    }
+
+    .mph-survey .result-box.fail .check-dot {
+      background: var(--danger);
+    }
+
+    .mph-survey .restart-link {
+      background: none;
+      border: none;
+      font-family: 'BentonSans Book', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    .mph-survey .restart-link:hover {
+      color: var(--purple);
+    }
+
+    @media (max-width: 480px) {
+      .mph-survey .card {
+        padding: 24px 18px 20px;
+      }
+
+      .mph-survey .intro-heading {
+        font-size: 26px;
+      }
+
+      .mph-survey .q-text {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <div class="mph-survey">
+
+    <!-- ── Intro ── -->
+    <div class="intro">
+      <div class="intro-label">Admissions check</div>
+      <h2 class="intro-heading">Can I get in?</h2>
+      <p class="intro-body">
+        We welcome applicants from all academic backgrounds — answer a few quick questions to find out if you meet the
+        eligibility requirements for Western's Master of Public Health program.
+      </p>
     </div>
-    <div id="mph-body"></div>
+
+    <!-- ── Survey card ── -->
+    <div class="card">
+      <div class="progress-row">
+        <div class="progress-track">
+          <div class="progress-fill" id="mph-prog" style="width:0%"></div>
+        </div>
+        <div class="progress-label" id="mph-prog-label">1 of 6</div>
+      </div>
+      <div id="mph-body"></div>
+    </div>
+
   </div>
 
-</div>
+  <script>
+    (function () {
+      var steps = [
+        {
+          id: 'degree',
+          section: 'Education',
+          q: 'Do you hold a four-year undergraduate degree (or international equivalent)?',
+          note: null,
+          options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
+          next: { yes: 'gpa', no: '__fail_degree' }
+        },
+        {
+          id: 'gpa',
+          section: 'Education',
+          q: 'Was your average over the last two years of your undergraduate degree at least 70% (or Canadian equivalent)?',
+          note: null,
+          options: [{ label: 'Yes', val: 'yes' }, { label: 'No — below 70%', val: 'no' }],
+          next: { yes: 'phexposure', no: '__fail_gpa' }
+        },
+        {
+          id: 'phexposure',
+          section: 'Public Health Background',
+          q: 'Have you gained awareness of the public health profession through work, volunteering, or other relevant activities?',
+          note: 'Any meaningful engagement with the field qualifies — paid work, volunteering, coursework, or community involvement.',
+          options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
+          next: { yes: 'englishnative', no: '__fail_ph' }
+        },
+        {
+          id: 'englishnative',
+          section: 'English Proficiency',
+          q: 'Is English your first language, OR have you completed at least two years of university-level study in an English-speaking country?',
+          note: 'Qualifying countries: Canada, United States, United Kingdom, Australia, New Zealand, Nigeria.',
+          options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
+          next: { yes: 'stats', no: 'engtest' }
+        },
+        {
+          id: 'engtest',
+          section: 'English Proficiency',
+          q: 'Have you obtained an approved English proficiency test result within the last two years that meets the minimum required scores?',
+          note: 'Qualifying tests: TOEFL (5.0 overall, no band below 4.5) · IELTS Academic (7.0, no band below 6.5) · Duolingo (135+) · CAEL (70 overall, 70 in writing & speaking) · Western ELC High-Advanced · Fanshawe ESL Level 10 (80%+ all components).',
+          options: [
+            { label: 'Yes — I meet one of these', val: 'yes' },
+            { label: 'No — not yet completed', val: 'no' }
+          ],
+          next: { yes: 'stats', no: '__fail_eng' }
+        },
+        {
+          id: 'stats',
+          section: 'Recommended',
+          q: 'Have you successfully completed an undergraduate statistics course with a minimum 70% grade within the last five years?',
+          note: 'This is recommended, not required — answering "no" will not disqualify your application.',
+          options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
+          next: { yes: '__pass_strong', no: '__pass_weak' }
+        }
+      ];
 
-<script>
-  (function () {
-    var steps = [
-      {
-        id: 'degree',
-        section: 'Education',
-        q: 'Do you hold a four-year undergraduate degree (or international equivalent)?',
-        note: null,
-        options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
-        next: { yes: 'gpa', no: '__fail_degree' }
-      },
-      {
-        id: 'gpa',
-        section: 'Education',
-        q: 'Was your average over the last two years of your undergraduate degree at least 70% (or Canadian equivalent)?',
-        note: null,
-        options: [{ label: 'Yes', val: 'yes' }, { label: 'No — below 70%', val: 'no' }],
-        next: { yes: 'phexposure', no: '__fail_gpa' }
-      },
-      {
-        id: 'phexposure',
-        section: 'Public Health Background',
-        q: 'Have you gained awareness of the public health profession through work, volunteering, or other relevant activities?',
-        note: 'Any meaningful engagement with the field qualifies — paid work, volunteering, coursework, or community involvement.',
-        options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
-        next: { yes: 'englishnative', no: '__fail_ph' }
-      },
-      {
-        id: 'englishnative',
-        section: 'English Proficiency',
-        q: 'Is English your first language, OR have you completed at least two years of university-level study in an English-speaking country?',
-        note: 'Qualifying countries: Canada, United States, United Kingdom, Australia, New Zealand, Nigeria.',
-        options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
-        next: { yes: 'stats', no: 'engtest' }
-      },
-      {
-        id: 'engtest',
-        section: 'English Proficiency',
-        q: 'Have you obtained an approved English proficiency test result within the last two years that meets the minimum required scores?',
-        note: 'Qualifying tests: TOEFL (5.0 overall, no band below 4.5) · IELTS Academic (7.0, no band below 6.5) · Duolingo (135+) · CAEL (70 overall, 70 in writing & speaking) · Western ELC High-Advanced · Fanshawe ESL Level 10 (80%+ all components).',
-        options: [
-          { label: 'Yes — I meet one of these', val: 'yes' },
-          { label: 'No — not yet completed', val: 'no' }
-        ],
-        next: { yes: 'stats', no: '__fail_eng' }
-      },
-      {
-        id: 'stats',
-        section: 'Recommended',
-        q: 'Have you successfully completed an undergraduate statistics course with a minimum 70% grade within the last five years?',
-        note: 'This is recommended, not required — answering "no" will not disqualify your application.',
-        options: [{ label: 'Yes', val: 'yes' }, { label: 'No', val: 'no' }],
-        next: { yes: '__pass_strong', no: '__pass_weak' }
+      var results = {
+        __fail_degree: {
+          type: 'fail', title: 'Not eligible at this time',
+          body: 'The MPH program requires a completed four-year undergraduate degree (or equivalent). You would need to complete an eligible undergraduate degree before applying.',
+          items: []
+        },
+        __fail_gpa: {
+          type: 'fail', title: 'Not eligible at this time',
+          body: 'A minimum average of 70% over the last two years of undergraduate study is required. You may want to explore upgrading options or contact the admissions team for guidance.',
+          items: []
+        },
+        __fail_ph: {
+          type: 'warn', title: 'Application unlikely to be competitive',
+          body: 'Demonstrated awareness of the public health field is a core eligibility criterion. Consider gaining relevant experience through volunteering or informational engagement before applying.',
+          items: []
+        },
+        __fail_eng: {
+          type: 'fail', title: 'English proficiency requirement not yet met',
+          body: 'You will need to complete one of the approved English proficiency tests before applying. Results must be from within the last two years.',
+          items: ['TOEFL iBT: 5.0 overall (no band below 4.5)', 'IELTS Academic: 7.0 overall (no band below 6.5)', 'Duolingo English Test: 135 or higher', 'CAEL: 70 overall with 70 in writing and speaking', 'Western ELC: High-Advanced level completion', 'Fanshawe ESL Level 10: 80%+ in all components']
+        },
+        __pass_strong: {
+          type: 'pass', title: 'You appear to meet all requirements',
+          body: 'You satisfy all mandatory admission criteria and the recommended statistics requirement. Your application is well-positioned — we encourage you to take the next step.',
+          items: ['Four-year undergraduate degree', 'Academic average ≥ 70% (last 2 years)', 'Public health background and exposure', 'English proficiency', 'Undergraduate statistics course']
+        },
+        __pass_weak: {
+          type: 'warn', title: 'You meet all mandatory requirements',
+          body: 'You satisfy all required admission criteria. Note that the undergraduate statistics course is recommended — consider highlighting any quantitative coursework or skills in your application materials.',
+          items: ['Four-year undergraduate degree', 'Academic average ≥ 70% (last 2 years)', 'Public health background and exposure', 'English proficiency', 'Statistics course: not completed (recommended only)']
+        }
+      };
+
+      var history = [];
+      var answers = {};
+
+      function getStep(id) { return steps.find(function (s) { return s.id === id; }); }
+
+      function render() {
+        var cur = history[history.length - 1];
+        if (!cur) { push(steps[0].id); return; }
+        if (cur.indexOf('__') === 0) { renderResult(cur); return; }
+        renderStep(getStep(cur));
       }
-    ];
 
-    var results = {
-      __fail_degree: {
-        type: 'fail', title: 'Not eligible at this time',
-        body: 'The MPH program requires a completed four-year undergraduate degree (or equivalent). You would need to complete an eligible undergraduate degree before applying.',
-        items: []
-      },
-      __fail_gpa: {
-        type: 'fail', title: 'Not eligible at this time',
-        body: 'A minimum average of 70% over the last two years of undergraduate study is required. You may want to explore upgrading options or contact the admissions team for guidance.',
-        items: []
-      },
-      __fail_ph: {
-        type: 'warn', title: 'Application unlikely to be competitive',
-        body: 'Demonstrated awareness of the public health field is a core eligibility criterion. Consider gaining relevant experience through volunteering or informational engagement before applying.',
-        items: []
-      },
-      __fail_eng: {
-        type: 'fail', title: 'English proficiency requirement not yet met',
-        body: 'You will need to complete one of the approved English proficiency tests before applying. Results must be from within the last two years.',
-        items: ['TOEFL iBT: 5.0 overall (no band below 4.5)', 'IELTS Academic: 7.0 overall (no band below 6.5)', 'Duolingo English Test: 135 or higher', 'CAEL: 70 overall with 70 in writing and speaking', 'Western ELC: High-Advanced level completion', 'Fanshawe ESL Level 10: 80%+ in all components']
-      },
-      __pass_strong: {
-        type: 'pass', title: 'You appear to meet all requirements',
-        body: 'You satisfy all mandatory admission criteria and the recommended statistics requirement. Your application is well-positioned — we encourage you to take the next step.',
-        items: ['Four-year undergraduate degree', 'Academic average ≥ 70% (last 2 years)', 'Public health background and exposure', 'English proficiency', 'Undergraduate statistics course']
-      },
-      __pass_weak: {
-        type: 'warn', title: 'You meet all mandatory requirements',
-        body: 'You satisfy all required admission criteria. Note that the undergraduate statistics course is recommended — consider highlighting any quantitative coursework or skills in your application materials.',
-        items: ['Four-year undergraduate degree', 'Academic average ≥ 70% (last 2 years)', 'Public health background and exposure', 'English proficiency', 'Statistics course: not completed (recommended only)']
+      function renderStep(step) {
+        var idx = steps.indexOf(step);
+        var pct = (idx / steps.length) * 100;
+        document.getElementById('mph-prog').style.width = pct + '%';
+        document.getElementById('mph-prog-label').textContent = (idx + 1) + ' of ' + steps.length;
+
+        var sel = answers[step.id] || null;
+        var isLast = idx === steps.length - 1;
+
+        var html = '<div class="q-section">' + step.section + '</div>';
+        html += '<div class="q-text">' + step.q + '</div>';
+        if (step.note) html += '<div class="q-note">' + step.note + '</div>';
+
+        html += '<div class="options">';
+        step.options.forEach(function (o) {
+          var cls = sel === o.val ? ' selected' : '';
+          html += '<button class="opt-btn' + cls + '" onclick="mphSelect(\'' + step.id + '\',\'' + o.val + '\')">';
+          html += '<span class="opt-radio">' + (sel === o.val ? '✓' : '') + '</span>';
+          html += o.label;
+          html += '</button>';
+        });
+        html += '</div>';
+
+        html += '<div class="nav">';
+        html += '<button class="btn btn-ghost" onclick="mphBack()" ' + (history.length <= 1 ? 'disabled' : '') + '>Back</button>';
+        html += '<button class="btn btn-primary" id="mph-next" onclick="mphNext(\'' + step.id + '\')" ' + (sel ? '' : 'disabled') + '>' + (isLast ? 'See result' : 'Next question') + '</button>';
+        html += '</div>';
+
+        document.getElementById('mph-body').innerHTML = html;
       }
-    };
 
-    var history = [];
-    var answers = {};
+      function renderResult(key) {
+        document.getElementById('mph-prog').style.width = '100%';
+        document.getElementById('mph-prog-label').textContent = 'Done';
 
-    function getStep(id) { return steps.find(function (s) { return s.id === id; }); }
+        var r = results[key];
+        var html = '<div class="result-box ' + r.type + '">';
+        html += '<div class="result-title">' + r.title + '</div>';
+        html += '<div class="result-body">' + r.body + '</div>';
+        if (r.items.length) {
+          html += '<ul class="checklist">';
+          r.items.forEach(function (i) { html += '<li><span class="check-dot"></span><span>' + i + '</span></li>'; });
+          html += '</ul>';
+        }
+        html += '</div>';
+        html += '<button class="restart-link" onclick="mphRestart()">Start over</button>';
 
-    function render() {
-      var cur = history[history.length - 1];
-      if (!cur) { push(steps[0].id); return; }
-      if (cur.indexOf('__') === 0) { renderResult(cur); return; }
-      renderStep(getStep(cur));
-    }
-
-    function renderStep(step) {
-      var idx = steps.indexOf(step);
-      var pct = (idx / steps.length) * 100;
-      document.getElementById('mph-prog').style.width = pct + '%';
-      document.getElementById('mph-prog-label').textContent = (idx + 1) + ' of ' + steps.length;
-
-      var sel = answers[step.id] || null;
-      var isLast = idx === steps.length - 1;
-
-      var html = '<div class="q-section">' + step.section + '</div>';
-      html += '<div class="q-text">' + step.q + '</div>';
-      if (step.note) html += '<div class="q-note">' + step.note + '</div>';
-
-      html += '<div class="options">';
-      step.options.forEach(function (o) {
-        var cls = sel === o.val ? ' selected' : '';
-        html += '<button class="opt-btn' + cls + '" onclick="mphSelect(\'' + step.id + '\',\'' + o.val + '\')">';
-        html += '<span class="opt-radio">' + (sel === o.val ? '✓' : '') + '</span>';
-        html += o.label;
-        html += '</button>';
-      });
-      html += '</div>';
-
-      html += '<div class="nav">';
-      html += '<button class="btn btn-ghost" onclick="mphBack()" ' + (history.length <= 1 ? 'disabled' : '') + '>Back</button>';
-      html += '<button class="btn btn-primary" id="mph-next" onclick="mphNext(\'' + step.id + '\')" ' + (sel ? '' : 'disabled') + '>' + (isLast ? 'See result' : 'Next question') + '</button>';
-      html += '</div>';
-
-      document.getElementById('mph-body').innerHTML = html;
-    }
-
-    function renderResult(key) {
-      document.getElementById('mph-prog').style.width = '100%';
-      document.getElementById('mph-prog-label').textContent = 'Done';
-
-      var r = results[key];
-      var html = '<div class="result-box ' + r.type + '">';
-      html += '<div class="result-title">' + r.title + '</div>';
-      html += '<div class="result-body">' + r.body + '</div>';
-      if (r.items.length) {
-        html += '<ul class="checklist">';
-        r.items.forEach(function (i) { html += '<li><span class="check-dot"></span><span>' + i + '</span></li>'; });
-        html += '</ul>';
+        document.getElementById('mph-body').innerHTML = html;
       }
-      html += '</div>';
-      html += '<button class="restart-link" onclick="mphRestart()">Start over</button>';
 
-      document.getElementById('mph-body').innerHTML = html;
-    }
+      function push(id) { history.push(id); render(); }
 
-    function push(id) { history.push(id); render(); }
+      window.mphSelect = function (stepId, val) {
+        answers[stepId] = val;
+        renderStep(getStep(stepId));
+      };
 
-    window.mphSelect = function (stepId, val) {
-      answers[stepId] = val;
-      renderStep(getStep(stepId));
-    };
+      window.mphNext = function (stepId) {
+        var step = getStep(stepId);
+        var val = answers[stepId];
+        if (!val) return;
+        push(step.next[val]);
+      };
 
-    window.mphNext = function (stepId) {
-      var step = getStep(stepId);
-      var val = answers[stepId];
-      if (!val) return;
-      push(step.next[val]);
-    };
+      window.mphBack = function () {
+        history.pop();
+        render();
+      };
 
-    window.mphBack = function () {
-      history.pop();
-      render();
-    };
+      window.mphRestart = function () {
+        history = [];
+        answers = {};
+        push(steps[0].id);
+      };
 
-    window.mphRestart = function () {
-      history = [];
-      answers = {};
       push(steps[0].id);
-    };
+    })();
+  </script>
+</body>
 
-    push(steps[0].id);
-  })();
-</script>
+</html>
